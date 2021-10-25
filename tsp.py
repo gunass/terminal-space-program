@@ -2,16 +2,17 @@
 import math
 import time
 
-_GRAVITY = 9.8
-_FPS = 5
+
+_FPS = 10
 _GAME_WIDTH = 100
 _GAME_HEIGHT = 30
 _icon0 = "|"
 _icon1 = "/"
 _icon2 = "—"
 _icon3 = "\\"
-
 _crashicon = "&"
+
+_GRAVITY = 9.8 / _FPS
 
 def vecSum(vector0, vector1):
     return [vector0[0] + vector1[0], vector0[1] + vector1[1]]
@@ -36,7 +37,7 @@ class Rocket:
         self.th = thrust
         self.fl = fuel
         self.xy = [0,0]
-        self.hd = heading
+        self.hd = 1
         self.vl = [0,0]
         self.ac = [0,-_GRAVITY]
         self.wg = self.ms * _GRAVITY
@@ -67,7 +68,7 @@ class Rocket:
         # If no fuel, acceleration is only gravity (down)
         # This kills the rocket
         elif self.liftoff:
-            return [0,-_GRAVITY / _FPS]
+            return [0,-_GRAVITY]
         else:
             return [0,0]
         
@@ -143,7 +144,7 @@ def printMap(mp):
                 print(j, end='')    
         print()
         i -= 1    
-    print("—————_______________________________________________________________________________________________")
+    print("ΠΠΠΠΠ______________________________________________________________________________________________")
     
     
 def start(map, rocket):
@@ -157,8 +158,8 @@ def start(map, rocket):
             print("Mission aborted!")
             break
     
-input(                     "Resize your terminal to 100x34 and press enter >")
-print(                     "Recommended: M=10, T=550, F=1, G=0.1")
+input(                     "Resize your terminal to 100x36 and press enter >")
+print(                     "Recommended: M=10, T=800, F=1, G=0.1")
     
 rocket_mass = int(input(   "Rocket mass      > "))
 rocket_thrust = int(input( "Rocket thrust    > "))
